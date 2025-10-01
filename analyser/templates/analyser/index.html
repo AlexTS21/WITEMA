@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mail Analyser</title>
+</head>
+<body>
+    <h1>Mail Analyser</h1>
+    <form method="post">
+        {% csrf_token %}
+        <textarea name="mail" rows="10" cols="50" placeholder="Write your email here..."></textarea><br><br>
+        <button type="submit">Analyse</button>
+    </form>
+
+    {% if emotions %}
+        <h2>Emotions:</h2>
+        <ul>
+        {% for key, value in emotions.items %}
+            <li>{{ key }}: {{ value|floatformat:2 }}</li>
+        {% endfor %}
+        </ul>
+
+        <h2>Topics:</h2>
+        <ul>
+        {% for topic in topics %}
+            <li>{{ topic }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
