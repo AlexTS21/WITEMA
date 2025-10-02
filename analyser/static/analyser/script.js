@@ -145,8 +145,8 @@ document.getElementById('analyseBtn').addEventListener('click', async ()=>{
 
     try{
         
-        //api call
-        const resp = await fetch('https://witema.onrender.com/api/analyse/', {
+        //api callhttps://witema.onrender.com/
+        const resp = await fetch('/api/analyse/', {
             method:'POST',
             headers:{ 
                 'Content-Type':'application/json',
