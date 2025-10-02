@@ -38,6 +38,6 @@ def analyse_mail_api(request):
 
     # scores to float to valid json
     emotions = {k: float(v) for k, v in emotions.items()}
-    print(emotions)
+    #print(emotions)
 
     return JsonResponse({"emotions": emotions, "topics": topics})

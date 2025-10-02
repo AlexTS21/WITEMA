@@ -23,11 +23,11 @@ function makeEmotionElements() {
         // HTML structure for every emotion
         emotionBar.innerHTML = `
             <div class="emotion-label">
-                <span class="emotion-name">${emotion.name}</span>
-                <span class="emotion-value">${emotion.value}%</span>
+                <span class="emotion-name ${emotion.name}">${emotion.name}</span>
+                <span class="emotion-value ${emotion.name}">${emotion.value}%</span>
             </div>
             <div class="progress-container">
-                <div class="progress-fill" data-value="${emotion.value}"></div>
+                <div class="progress-fill" id=bar-${emotion.name} data-value="${emotion.value}"></div>
             </div>
         `;
         
@@ -162,7 +162,7 @@ document.getElementById('analyseBtn').addEventListener('click', async ()=>{
             alert(data.error||'Error del servidor'); 
             return; 
         }
-        console.log(data)
+        //console.log(data)
         // Update values
         updateEmotions(data.emotions);
         updateTopics(data.topics);
@@ -173,11 +173,11 @@ document.getElementById('analyseBtn').addEventListener('click', async ()=>{
         alert('Error de conexión'); 
     }
     finally{ 
-        // Siempre ejecutar: reestablecer estado del botón y spinner
+        // Reset values
         btn.disabled=false; 
         spinner.style.display='none'; 
     }
 });
 
-// Inicializar las barras de emociones al cargar la página
+// Inizialize the bars 
 document.addEventListener('DOMContentLoaded', makeEmotionElements);
