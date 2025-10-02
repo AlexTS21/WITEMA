@@ -3,12 +3,13 @@ import json
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from .utils import MailAnalyser
+from .utils import MailAnalyserDummy
 from django.views.decorators.csrf import csrf_exempt
 import os
 API_TOKEN = "SecretToken123"
 # Instance of the model
-analyser = MailAnalyser()
+analyser = MailAnalyserDummy()
+print(analyser.getEmotions("HOLA"))
 
 def index(request):
     # frontend with js
@@ -39,6 +40,6 @@ def analyse_mail_api(request):
 
     # scores to float to valid json
     emotions = {k: float(v) for k, v in emotions.items()}
-    #print(emotions)
+    print(emotions)
 
     return JsonResponse({"emotions": emotions, "topics": topics})

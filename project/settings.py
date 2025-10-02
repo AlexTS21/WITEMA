@@ -24,8 +24,7 @@ SECRET_KEY = 'django-insecure-(f6#dn9pn_aepdwu#e^$3_w1wbl2)x7-^byziu%15cdre^2*c8
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =False
-
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://witema.onrender.com']
 
 
 # Application definition

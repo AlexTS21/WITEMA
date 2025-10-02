@@ -23,6 +23,19 @@ p{
     padding-bottom: 30px;
 }
 
+#repo{
+    border: none;
+    background: none;
+    outline: none;
+    box-shadow: none;
+    color: #444;
+    font-family:'Anta';
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+
+}
+
 .container{
     width: 100%;
     
@@ -68,10 +81,19 @@ button:hover {
     border: 1px solid rgb(163, 146, 159);
 }
 
+#topicsList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
 a{
     color: #555;
     padding: 0.7em 1.7em;
-    font-size: 18px;
+    font-size: 13px;
     font-weight: 500;
     border-radius: 0.5em;
     background: #e8e8e8;
@@ -80,11 +102,12 @@ a{
     transition: all 0.3s;
     padding: 10px;
     margin: 15px;
+    max-width: 150px;
     box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
 }
 
 #topic{
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 #emotions{
