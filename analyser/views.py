@@ -5,7 +5,8 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from .utils import MailAnalyser
 from django.views.decorators.csrf import csrf_exempt
-
+import os
+API_TOKEN = os.environ.get("MAIL_API_TOKEN", "fallback_token")
 # Instance of the model
 analyser = MailAnalyser()
 
@@ -13,7 +14,7 @@ def index(request):
     # frontend with js
     return render(request, "analyser/index.html")
 # Token 
-API_TOKEN = "SecretToken123"
+
 
 @csrf_exempt 
 @require_POST

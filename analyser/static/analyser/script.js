@@ -1,4 +1,4 @@
-const API_TOKEN = "SecretToken123";
+
 
 // FUnction to create elements
 function makeEmotionElements() {
