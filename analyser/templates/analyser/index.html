@@ -2,30 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mail Analyser</title>
+    <title>WITEMA</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=SUSE+Mono:ital,wght@0,100..800;1,100..800&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/style.css">
+    
 </head>
 <body>
-    <h1>Mail Analyser</h1>
-    <form method="post">
-        {% csrf_token %}
-        <textarea name="mail" rows="10" cols="50" placeholder="Write your email here..."></textarea><br><br>
-        <button type="submit">Analyse</button>
-    </form>
+    
+    <h1>What is this e-mail about?</h1>
+    <div class="container">
+        <div class="left-side">
+            <textarea id="mailInput" rows="9" placeholder="Paste your e-mail here..."></textarea><br><br>
+        <button id="analyseBtn">Analyze</button>
+        <span id="spinner">Analizando…</span>
+        </div>
+       
+        <div class="rigth-side">
+            <h2>Emotions</h2>
+            <div id="emotionsContainer">
+                <!-- Progess bars of emotions-->
+            </div>
 
-    {% if emotions %}
-        <h2>Emotions:</h2>
-        <ul>
-        {% for key, value in emotions.items %}
-            <li>{{ key }}: {{ value|floatformat:2 }}</li>
-        {% endfor %}
-        </ul>
-
-        <h2>Topics:</h2>
-        <ul>
-        {% for topic in topics %}
-            <li>{{ topic }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
+            <h2>Topics</h2>
+            <ul id="topicsList"><li>No topics yet...</li></ul>
+        </div>
+    </div>
+    <script src="../../static/script.js"></script>  
 </body>
 </html>

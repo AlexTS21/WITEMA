@@ -1,23 +1,43 @@
+# analyser/views.py
+import json
 from django.shortcuts import render
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 from .utils import MailAnalyser
+from django.views.decorators.csrf import csrf_exempt
 
-# Instanciamos la clase una sola vez
+# Instance of the model
 analyser = MailAnalyser()
 
-def analyse_mail(request):
-    """
-    Vista que maneja el formulario con textarea para analizar mails
-    """
-    emotions = None
-    topics = None
+def index(request):
+    # frontend with js
+    return render(request, "analyser/index.html")
+# Token 
+API_TOKEN = "SecretToken123"
 
-    if request.method == "POST":
-        mail = request.POST.get("mail", "")
-        if mail:
-            emotions = analyser.getEmotions(mail)
-            topics = analyser.getTopics(mail)
+@csrf_exempt 
+@require_POST
+def analyse_mail_api(request):
+    # Check token 
+    token = request.headers.get("Authorization")
+    if token != f"Token {API_TOKEN}":
+        return JsonResponse({"error": "Unauthorized"}, status=401)
 
-    return render(request, "analyser/index.html", {  # Asegúrate que el path coincide con la carpeta de templates
-        "emotions": emotions,
-        "topics": topics
-    })
+    try:
+        payload = json.loads(request.body)
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "Invalid JSON"}, status=400)
+
+    mail = payload.get("mail", "").strip()
+    if not mail:
+        return JsonResponse({"error": "No mail content provided"}, status=400)
+
+    # analyze mail
+    emotions = analyser.getEmotions(mail)
+    topics = analyser.getTopics(mail)
+
+    # scores to float to valid json
+    emotions = {k: float(v) for k, v in emotions.items()}
+    print(emotions)
+
+    return JsonResponse({"emotions": emotions, "topics": topics})
